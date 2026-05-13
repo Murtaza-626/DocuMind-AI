@@ -1,4 +1,4 @@
-# Local PDF RAG + Unsloth QLoRA Fine-Tuning
+# Local PDF RAG + QLoRA Fine-Tuning
 
 This project refactors a single-file Streamlit PDF assistant into a modular architecture that supports:
 
