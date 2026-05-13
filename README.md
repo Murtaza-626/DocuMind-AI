@@ -4,7 +4,7 @@ This project refactors a single-file Streamlit PDF assistant into a modular arch
 
 - Local PDF ingestion and chunking
 - JSONL generation for supervised fine-tuning (instruction/input/output)
-- Local QLoRA fine-tuning with Unsloth
+- Local QLoRA fine-tuning with HuggingFaceTB/SmolLM2-135M-Instruct
 - Local inference with strict grounded prompts
 - RAG using SentenceTransformers embeddings + Chroma vector DB
 
@@ -12,7 +12,7 @@ This project refactors a single-file Streamlit PDF assistant into a modular arch
 
 - `config.py`: Centralized settings for paths, chunking, retrieval, training, and generation.
 - `data_processor.py`: PDF loading, text cleaning, chunking, JSONL formatting, Chroma build/persist.
-- `train_model.py`: Unsloth QLoRA training script for LoRA adapter creation.
+- `train_model.py`: QLoRA training script for LoRA adapter creation.
 - `inference.py`: Local adapter/model loading, vector DB retrieval, strict Q&A + summarization generation.
 - `app.py`: Streamlit UI with two phases:
   - Phase 1: Upload and train
@@ -31,11 +31,11 @@ python -m venv .venv
 
 ```powershell
 pip install --upgrade pip
-pip install streamlit langchain langchain-community langchain-text-splitters pypdf chromadb sentence-transformers datasets trl transformers peft accelerate bitsandbytes unsloth
+pip install streamlit langchain langchain-community langchain-text-splitters pypdf chromadb sentence-transformers datasets trl transformers peft accelerate bitsandbytes
 ```
 
 Notes:
-- Unsloth + 4-bit QLoRA is intended for CUDA GPUs.
+- 4-bit QLoRA is intended for CUDA GPUs.
 - On Windows, WSL2 with CUDA passthrough is often the most reliable setup for training.
 
 ## How Training Works
@@ -79,10 +79,9 @@ python train_model.py
 - Chroma DB: `data/vector_db/`
 - LoRA adapter: `models/adapters/pdf_lora_adapter/`
 
-## Suggested Model Upgrade
+## Model Details
 
-For stronger quality (if GPU VRAM allows), switch in `config.py`:
-
-- `base_model_name = "unsloth/Llama-3.2-3B-Instruct"`
-
-Keep 4-bit QLoRA enabled to reduce memory usage.
+Base Model: **HuggingFaceTB/SmolLM2-135M-Instruct**
+- Lightweight 135M parameter instruction-tuned model
+- Optimized for efficient fine-tuning with 4-bit QLoRA
+- Suitable for local inference with limited GPU VRAM
