@@ -1,0 +1,16 @@
+# --- Environment and Dependencies ---
+.conda/
+.vscode/
+__pycache__/
+
+# --- Streamlit Local Config ---
+.streamlit/
+
+# --- Large Data and Private Files ---
+data/
+models/
+ss/
+
+# --- OS Specific Files ---
+.DS_Store
+Thumbs.db
