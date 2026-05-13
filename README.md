@@ -47,7 +47,7 @@ Notes:
    - Build and persist Chroma DB
    - Build Alpaca-style JSONL records for SFT
 3. Click **Start QLoRA Training**:
-   - Load base model `unsloth/Llama-3.2-1B-Instruct`
+   - Load base model `HuggingFaceTB/SmolLM2-135M-Instruct`
    - Train LoRA adapter in 4-bit mode
    - Save adapter to `models/adapters/pdf_lora_adapter`
 
